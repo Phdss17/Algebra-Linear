@@ -24,9 +24,13 @@ public:
 
     int getHigh();
     int getLength();
+    
+    matriz<T> operator+(matriz<T> m);
+    matriz<T> operator-(matriz<T> m);
 
     matriz<T> operator*(int n);
     matriz<T> operator*(matriz<T> m);
+
 };
 
 template<typename T>
@@ -83,12 +87,44 @@ int matriz<T>::getLength(){
 }
 
 template<typename T>
-matriz<T> matriz<T>::operator*(int n){
+matriz<T> matriz<T>::operator+(matriz<T> m){
+    if(this->getHigh() != m.getHigh() || this->getLength() != m.getLength()){
+        throw "Fail: Não é póssivel multiplicar";
+    }
+
+    matriz<T> new_m(m.getHigh(), this->getLength());
     for(int i = 0; i < this->altura; i++){
         for(int j = 0; j < this->largura; j++){
-            this->_matriz[i][j] = this->_matriz[i][j] * n;
+            new_m[i][j] = m._matriz[i][j] + this->_matriz[i][j];
         }
     }
+    return new_m;
+}
+
+template<typename T>
+matriz<T> matriz<T>::operator-(matriz<T> m){
+    if(this->getHigh() != m.getHigh() || this->getLength() != m.getLength()){
+        throw "Fail: Não é póssivel multiplicar";
+    }
+
+    matriz<T> new_m(m.getHigh(), this->getLength());
+    for(int i = 0; i < this->altura; i++){
+        for(int j = 0; j < this->largura; j++){
+            new_m[i][j] = m._matriz[i][j] - this->_matriz[i][j];
+        }
+    }
+    return new_m;
+}
+
+template<typename T>
+matriz<T> matriz<T>::operator*(int n){
+    matriz<T> new_m(this->getHigh(), this->getLength());
+    for(int i = 0; i < this->altura; i++){
+        for(int j = 0; j < this->largura; j++){
+            new_m[i][j] = this->_matriz[i][j] * n;
+        }
+    }
+    return new_m;
 }
 
 template<typename T>
@@ -96,12 +132,16 @@ matriz<T> matriz<T>::operator*(matriz<T>  m){
     if(this->getHigh() != m.getLength()){
         throw "Fail: Não é póssivel multiplicar";
     }
+
     matriz<T> new_m(m.getHigh(), this->getLength());
-    for(int i = 0; i < this->altura; i++){
-        for(int j = 0; j < this->largura; j++){
-            this->_matriz[i][j] = this->_matriz[i][j] * n;
+    for(int i = 0; i < this->largura; i++){
+        int n = 0;
+        for(int j = 0; j < this->altura; j++){
+            n += this->_matriz[j][i] * m._matriz[i][j];
         }
+        new_m[j][i] = n;
     }
+    return new_m;
 }
 
 #endif 

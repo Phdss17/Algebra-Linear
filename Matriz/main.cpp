@@ -7,8 +7,8 @@ using namespace std;
 int main(){
     vector<matriz<int>> matrizes;
 
-    cout << "O que quer fazer?" << endl;
     while(true){
+        cout << "O que quer fazer?" << endl;
         string arg;
         cin >> arg;
 
@@ -45,6 +45,21 @@ int main(){
             cout << "Escreva abaixo a posição do valor a ser removido: " << endl;
             cin >> x >> y;
             matrizes[n].remove(x, y);
+        }else if(arg == "Altura"){
+            int n;
+            cout << "Digite a posição da matriz: ";
+            cin >> n;
+            cout << matrizes[n].getHigh() << endl;
+        }else if(arg == "largura"){
+            int n;
+            cout << "Digite a posição da matriz: ";
+            cin >> n;
+            cout << matrizes[n].getLength() << endl;
+        }else if(arg == "somar"){
+            int n, m;
+            cout << "Digite as posições das matrizes que deseja somar: ";
+            cin >> n >> m;
+            cout << matrizes[n].getLength() << endl;
         }else{
             cout << "Fail: Comando inválido" << endl;
         }
