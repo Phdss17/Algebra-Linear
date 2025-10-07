@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <vector>
+#include <exception>
 
 using namespace std;
 
@@ -14,9 +15,18 @@ private:
     vector<vector<T>> _matriz;
 public:
     matriz(int altura, int largura);
-    void show();
+
+    template<typename U>
+    friend ostream& operator<<(ostream& os, const matriz<U>& m);
+
     void insert(T n, int x, int y);
     void remove(int x, int y);
+
+    int getHigh();
+    int getLength();
+
+    matriz<T> operator*(int n);
+    matriz<T> operator*(matriz<T> m);
 };
 
 template<typename T>
@@ -29,14 +39,15 @@ matriz<T>::matriz(int altura, int largura){
     }
 }
 
-template<typename T>
-void matriz<T>::show(){
-   for(int i = 0; i < this->altura; i++){
-     for(int j = 0; j < this->largura; j++){
-        cout << this->_matriz[i][j] << " "; 
+template<typename U>
+ostream& operator<<(ostream& os, const matriz<U>& m){
+   for(int i = 0; i < m.altura; i++){
+     for(int j = 0; j < m.largura; j++){
+        os << m._matriz[i][j] << " "; 
      }
-     cout << endl;
+     os << endl;
    } 
+   return os;
 }
 
 template<typename T>
@@ -58,6 +69,38 @@ void matriz<T>::remove(int x, int y){
         cout << "Fail: Posição Invalida!" << endl;
     }else{
         this->_matriz[x][y] = 0;
+    }
+}
+
+template<typename T>
+int matriz<T>::getHigh(){
+    return altura;
+}
+
+template<typename T>
+int matriz<T>::getLength(){
+    return largura;
+}
+
+template<typename T>
+matriz<T> matriz<T>::operator*(int n){
+    for(int i = 0; i < this->altura; i++){
+        for(int j = 0; j < this->largura; j++){
+            this->_matriz[i][j] = this->_matriz[i][j] * n;
+        }
+    }
+}
+
+template<typename T>
+matriz<T> matriz<T>::operator*(matriz<T>  m){
+    if(this->getHigh() != m.getLength()){
+        throw "Fail: Não é póssivel multiplicar";
+    }
+    matriz<T> new_m(m.getHigh(), this->getLength());
+    for(int i = 0; i < this->altura; i++){
+        for(int j = 0; j < this->largura; j++){
+            this->_matriz[i][j] = this->_matriz[i][j] * n;
+        }
     }
 }
 

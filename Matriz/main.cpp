@@ -12,7 +12,7 @@ int main(){
         string arg;
         cin >> arg;
 
-        if(arg == "sair"){
+        if(arg == "end"){
             cout << "Adeus!" << endl;
             break;
         }else if(arg == "criar"){
@@ -26,12 +26,10 @@ int main(){
             int x;
             cout << "Digite a posição da matriz que gostaria de ver: ";
             cin >> x;
-            matrizes[x].show();
+            cout << matrizes[x] << "\n";
         }else if(arg == "showAll"){
             for(int i = 0; i < matrizes.size(); i++){
-                cout << "Matriz na posição " << i << endl;
-                matrizes[i].show();
-                cout << "\n";
+                cout << "Matriz na posição " << i << endl << matrizes[i] << "\n";
             }
         }else if(arg == "insert"){
             int n, v, x, y;
