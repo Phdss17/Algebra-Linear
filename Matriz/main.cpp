@@ -8,7 +8,7 @@ int main(){
     vector<matriz<int>> matrizes;
 
     while(true){
-        cout << "O que quer fazer?" << endl;
+        cout << "\n" << "O que quer fazer?" << endl;
         string arg;
         cin >> arg;
 
@@ -29,20 +29,20 @@ int main(){
             cout << matrizes[x] << "\n";
         }else if(arg == "showAll"){
             for(int i = 0; i < matrizes.size(); i++){
-                cout << "Matriz na posição " << i << endl << matrizes[i] << "\n";
+                cout << "Matriz na posição " << i << endl << matrizes[i];
             }
         }else if(arg == "insert"){
             int n, v, x, y;
             cout << "Digite a posição da matriz: ";
             cin >> n;
-            cout << "Escreva abaixo e em ordem o valor a ser inserido, e a posição: " << endl;
+            cout << "Escreva abaixo e em ordem o valor a ser inserido, e a posição: ";
             cin >> v >> x >> y;
             matrizes[n].insert(v, x, y);
         }else if(arg == "remove"){
             int n, x, y;
             cout << "Digite a posição da matriz: ";
             cin >> n;
-            cout << "Escreva abaixo a posição do valor a ser removido: " << endl;
+            cout << "Escreva abaixo a posição do valor a ser removido: ";
             cin >> x >> y;
             matrizes[n].remove(x, y);
         }else if(arg == "Altura"){
@@ -59,7 +59,22 @@ int main(){
             int n, m;
             cout << "Digite as posições das matrizes que deseja somar: ";
             cin >> n >> m;
-            cout << matrizes[n].getLength() << endl;
+            matrizes.push_back(matrizes[n] + matrizes[m]);
+        }else if(arg == "sub"){
+            int n, m;
+            cout << "Digite as posições das matrizes que deseja subtrair: ";
+            cin >> n >> m;
+            matrizes.push_back(matrizes[n] - matrizes[m]);
+        }else if(arg == "multEsc"){
+            int n, x;
+            cout << "Digite a posição da matrize que deseja multiplicar e o seu escalar: ";
+            cin >> n >> x;
+            matrizes.push_back(matrizes[n] * x);
+        }else if(arg == "mult"){
+            int n, m;
+            cout << "Digite as posições das matrizes que deseja multiplicar: ";
+            cin >> n >> m;
+            matrizes.push_back(matrizes[n] * matrizes[m]);
         }else{
             cout << "Fail: Comando inválido" << endl;
         }

@@ -95,7 +95,7 @@ matriz<T> matriz<T>::operator+(matriz<T> m){
     matriz<T> new_m(m.getHigh(), this->getLength());
     for(int i = 0; i < this->altura; i++){
         for(int j = 0; j < this->largura; j++){
-            new_m[i][j] = m._matriz[i][j] + this->_matriz[i][j];
+            new_m._matriz[i][j] = m._matriz[i][j] + this->_matriz[i][j];
         }
     }
     return new_m;
@@ -110,7 +110,7 @@ matriz<T> matriz<T>::operator-(matriz<T> m){
     matriz<T> new_m(m.getHigh(), this->getLength());
     for(int i = 0; i < this->altura; i++){
         for(int j = 0; j < this->largura; j++){
-            new_m[i][j] = m._matriz[i][j] - this->_matriz[i][j];
+            new_m._matriz[i][j] = m._matriz[i][j] - this->_matriz[i][j];
         }
     }
     return new_m;
@@ -121,7 +121,7 @@ matriz<T> matriz<T>::operator*(int n){
     matriz<T> new_m(this->getHigh(), this->getLength());
     for(int i = 0; i < this->altura; i++){
         for(int j = 0; j < this->largura; j++){
-            new_m[i][j] = this->_matriz[i][j] * n;
+            new_m._matriz[i][j] = this->_matriz[i][j] * n;
         }
     }
     return new_m;
@@ -129,18 +129,13 @@ matriz<T> matriz<T>::operator*(int n){
 
 template<typename T>
 matriz<T> matriz<T>::operator*(matriz<T>  m){
-    if(this->getHigh() != m.getLength()){
+    if(this->getLength() != m.getHigh()){
         throw "Fail: Não é póssivel multiplicar";
     }
-
-    matriz<T> new_m(m.getHigh(), this->getLength());
-    for(int i = 0; i < this->largura; i++){
-        int n = 0;
-        for(int j = 0; j < this->altura; j++){
-            n += this->_matriz[j][i] * m._matriz[i][j];
-        }
-        new_m[j][i] = n;
-    }
+//TODO tentar fazer uma lógica funcinal para essa joça
+    matriz<T> new_m(this->getHigh(), m.getLength());
+    int p = 0, q = 0;
+    
     return new_m;
 }
 
