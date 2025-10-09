@@ -55,7 +55,7 @@ int main(){
             cout << "Digite a posição da matriz: ";
             cin >> n;
             cout << matrizes[n].getLength() << endl;
-        }else if(arg == "somar"){
+        }else if(arg == "som"){
             int n, m;
             cout << "Digite as posições das matrizes que deseja somar: ";
             cin >> n >> m;
